@@ -1,0 +1,6 @@
+.canvas-3d {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1; /* of 0 afhankelijk van je layout */
+}
