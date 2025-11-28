@@ -1,33 +1,15 @@
-body,
-html,
-#root {
+/* src/index.css */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
   margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
 }
 
-.canvas-3d {
-  position: fixed;
-  inset: 0;
-}
-
-/* Curseur */
-.circle {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  background: black;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.circle-follow {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 2px solid black;
-  border-radius: 50%;
-  pointer-events: none;
+#root {
+  min-height: 100vh;
 }

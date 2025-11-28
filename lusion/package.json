@@ -12,9 +12,11 @@
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.0",
+    "@splinetool/loader": "^1.12.2",
     "gsap": "^3.13.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.6",
     "three": "^0.181.2"
   },
   "devDependencies": {

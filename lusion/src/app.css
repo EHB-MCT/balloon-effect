@@ -1,6 +1,255 @@
-.canvas-3d {
-  position: fixed;
-  inset: 0;
+/* --------- BASE --------- */
+
+:root {
+  --bg-light: #f4f3f8;
+  --text-main: #050505;
+  --text-muted: #7c7c85;
+  --pill-dark: #111111;
+  --pill-light: #ffffff;
+  --card-bg: #151515;
+  --card-radius: 22px;
+  --shadow-soft: 0 42px 80px rgba(0, 0, 0, 0.25);
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* empêche le scroll → 100vh strict */
+}
+
+body {
+  font-family: var(--font-main);
+  background: radial-gradient(
+    circle at top left,
+    #f7f6fb 0,
+    #f0eff5 40%,
+    #ebeaf1 100%
+  );
+  color: var(--text-main);
+}
+
+/* --------- LAYOUT GENERAL --------- */
+
+.page {
+  height: 100vh; /* avant c’était min-height */
+  max-height: 100vh; /* pour être sûr */
   overflow: hidden;
-  z-index: -1; /* of 0 afhankelijk van je layout */
+}
+
+.container {
+  width: 1500px; /* ÉNORME largeur → comme les vraies landing pages premium */
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 50px; /* marge interne confortable */
+}
+
+/* --------- HEADER --------- */
+
+.top-bar {
+  padding: 45px 0 8px;
+}
+
+.top-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  letter-spacing: 0.08em;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.top-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icon-btn,
+.pill-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.icon-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 99px;
+  background: var(--pill-light);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+/* BASE BUTTON */
+
+.pill-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 999px;
+  padding: 18px 18px; /* jouw waarde */
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  /* animaties voor hover */
+  transition: background-color 0.25s ease, color 0.25s ease,
+    box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+/* --- LET'S TALK (donkere pill) --- */
+
+.pill-btn--dark {
+  background: #282834; /* jouw kleur */
+  color: #fff;
+}
+
+.pill-btn--dark:hover {
+  background: #1230dc; /* Lusion-blauw */
+  color: #ffffff;
+  transform: translateY(-3px); /* kleine “lift” */
+}
+
+/* optioneel: kleine slide op de pijl als je een span gebruikt voor de icon */
+.pill-btn--dark:hover .pill-btn__arrow {
+  transform: translateX(4px);
+}
+
+/* --- MENU (lichte pill) --- */
+
+.pill-btn--light {
+  background: #1230dc; /* jouw kleur */
+  color: #f0f0f0;
+}
+
+.pill-btn--light:hover {
+  background: #4b4b53;
+  transform: translateY(-3px);
+}
+
+/* --------- HERO --------- */
+
+.hero {
+  min-height: calc(100vh - 70px);
+  display: flex;
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  padding-bottom: 32px;
+}
+
+/* Texte = beaucoup plus haut, proche du header */
+.hero-text {
+  max-width: 640px;
+  margin-top: 5px;
+}
+
+.hero-text h1 {
+  font-size: 34px;
+  line-height: 1.05;
+  font-weight: 300;
+}
+
+.hero-text p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Carte 3D centrée sous le texte, moins haute (comme Lusion) */
+
+.hero-3d-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  width: 100%;
+
+  height: 60vh; /* ← valeur parfaite pour un 100vh total */
+}
+/* Le conteneur que tu renvoies dans Canvas3D */
+.canvas-3d {
+  width: 100%;
+  height: 100%;
+}
+
+/* --------- FOOTER "SCROLL TO EXPLORE" --------- */
+
+.hero-footer {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 42px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-footer span:first-child,
+.hero-footer span:last-child {
+  font-size: 18px;
+  color: var(--text-main);
+}
+
+/* --------- RESPONSIVE SIMPLE --------- */
+
+@media (max-width: 900px) {
+  .hero-text h1 {
+    font-size: 36px;
+  }
+
+  .hero-3d-card {
+    height: 420px;
+  }
+}
+
+/* --------- MENU PAGE --------- */
+
+.menu-page {
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Header du menu (logo + back) */
+.menu-page {
+  height: 100vh;
+  background: #ffffff; /* page blanche */
+  overflow: hidden;
+}
+
+/* zone du canvas sous le header */
+.menu-main {
+  height: calc(100vh - 70px); /* approximatif: hauteur totale - header */
+  padding: 0 50px; /* même padding latéral que .container */
+  box-sizing: border-box;
+}
+
+/* le canvas prend toute la zone dispo */
+.menu-canvas {
+  width: 100%;
+  height: 100%;
 }
