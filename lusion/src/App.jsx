@@ -2,7 +2,6 @@
 import { useState } from "react";
 import "./App.css";
 import Canvas3D from "./components/Canvas3D";
-import MenuPage from "./components/MenuPage";
 
 function App() {
   // "home" = landing 3D, "menu" = page blanche
