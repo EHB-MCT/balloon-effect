@@ -1,16 +1,58 @@
-# React + Vite
+# Lusion-style 3D Shapes (Three.js + GLTF)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dit project toont een groep **3D-vormen** die zweven, botsen en reageren op muisbeweging.  
+Geïnspireerd op de esthetiek van **Lusion**: artistiek, donker, zacht reflecterend.
 
-Currently, two official plugins are available:
+## Functionaliteiten
+- Shapes geladen met **GLTFLoader**
+- Unieke **kleur + materiaal** per clone (mat of glossy)
+- Realistische belichting met 5 lichtbronnen
+- **Zweefeffect** via `Math.sin` + `lerp`
+- **Botsingdetectie** tussen vormen
+- Interactie via **muiskracht** en **raycaster**
+- Volledig **responsief**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Gebruikte code en bronnen
 
-## React Compiler
+1. `import * as THREE from "three";`  
+   → Core Three.js functionaliteit (scene, camera, mesh, vector, etc.)  
+   🔗 https://threejs.org/docs/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. `import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";`  
+   → Voor het laden van `.glb` modellen  
+   🔗 https://threejs.org/docs/#examples/en/loaders/GLTFLoader
 
-## Expanding the ESLint configuration
+3. `new THREE.Group()`  
+   → Om meerdere clones te groeperen in de scene  
+   🔗 https://threejs.org/docs/#api/en/objects/Group
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+4. `scene.background = new THREE.Color("#251018");`  
+   → Achtergrondkleur instellen op de 3D canvas  
+   🔗 https://threejs.org/docs/#api/en/scenes/Scene.background
+
+5. `new THREE.DirectionalLight(), HemisphereLight(), AmbientLight()`  
+   → Voor belichting vanuit verschillende richtingen  
+   🔗 https://threejs.org/docs/#api/en/lights/DirectionalLight  
+   🔗 https://threejs.org/docs/#api/en/lights/AmbientLight  
+   🔗 https://threejs.org/docs/#api/en/lights/HemisphereLight
+
+6. `child.material.clone()` + `mat.metalness`, `roughness`  
+   → Glossy/matte materialen toepassen  
+   🔗 https://threejs.org/docs/#api/en/materials/MeshStandardMaterial
+
+7. `raycaster.setFromCamera(mouse, camera)`  
+   → Detectie van welke shape onder de muis zit  
+   🔗 https://threejs.org/docs/#api/en/core/Raycaster
+
+8. `Vector3.lerp()`  
+   → Soepele overgang naar ademende posities  
+   🔗 https://threejs.org/docs/#api/en/math/Vector3.lerp
+
+9. `Box3().setFromObject(...)`  
+   → Om de grootte en center van het model te bepalen  
+   🔗 https://threejs.org/docs/#api/en/math/Box3
+
+
+10. `window.addEventListener("resize", ...)`  
+    → Zorgt dat canvas correct schaalt bij schermgrootte  
+    🔗 https://threejs.org/docs/#api/en/cameras/PerspectiveCamera.aspect
